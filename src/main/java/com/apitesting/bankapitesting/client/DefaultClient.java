@@ -29,6 +29,8 @@ public class DefaultClient {
 
     public Response postRequest(Object object, String url, String path){
         RestAssured.baseURI = url;
+
+        //promena za git
         RequestSpecification requestSpec = RestAssured.given();
         JSONObject requestParam = new JSONObject();
         requestSpec.header("Content-Type","application/json");
