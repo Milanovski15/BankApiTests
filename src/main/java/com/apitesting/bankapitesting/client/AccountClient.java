@@ -1,33 +1,32 @@
 package com.apitesting.bankapitesting.client;
-import com.apitesting.bankapitesting.client.DefaultClient;
 import com.apitesting.bankapitesting.models.AccountModel;
-import io.restassured.RestAssured;
-import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.json.simple.JSONObject;
 
-public class AccountClient extends DefaultClient{
-    DefaultClient defaultClient = new DefaultClient();
+import java.io.FileNotFoundException;
+
+public class AccountClient extends HttpRestClient {
+    static String URL = "http://localhost:55597/api";
+    static String PATH = "Accounts";
+    HttpRestClient httpRestClient = new HttpRestClient();
 
     public Response getAccounts(){
-        return defaultClient.getRequest("http://localhost:55597/api","accounts");
+        return httpRestClient.getRequest(URL,PATH);
     }
 
     public Response getAccount(int id){
-        return defaultClient.getByIdRequest(id,"http://localhost:55597/api","accounts");
+        return httpRestClient.getByIdRequest(id,URL,PATH);
     }
 
     public Response postAccount(AccountModel account){
-        return defaultClient.postRequest(account,"http://localhost:55597/api","Accounts");
+        return httpRestClient.postRequest(account,URL,PATH);
     }
 
     public Response updateAccount(int id, AccountModel accountUpdated){
-        return defaultClient.updateRequest(id,accountUpdated,"http://localhost:55597/api","Accounts");
+        return httpRestClient.updateRequest(id,accountUpdated,URL,PATH);
     }
 
     public Response deleteAccount(int id){
-        return defaultClient.deleteRequest(id,"http://localhost:55597/api","Accounts");
+        return httpRestClient.deleteRequest(id,URL,PATH);
     }
 
 

@@ -1,28 +1,29 @@
 package com.apitesting.bankapitesting.client;
 
-import com.apitesting.bankapitesting.models.ClientGetResponseBody;
 import com.apitesting.bankapitesting.models.ClientPostBody;
 import io.restassured.response.Response;
 
 public class ClientClient {
-    DefaultClient defaultClient = new DefaultClient();
+    static String URL = "http://localhost:55597/api";
+    static String PATH = "Clients";
+    HttpRestClient httpRestClient = new HttpRestClient();
 
     public Response getClients(){
-        return defaultClient.getRequest("http://localhost:55597/api","Clients");
+        return httpRestClient.getRequest(URL,PATH);
     }
 
     public Response getClient(int id){
-        return defaultClient.getByIdRequest(id,"http://localhost:55597/api","Clients");
+        return httpRestClient.getByIdRequest(id,URL,PATH);
     }
 
     public Response postClient(ClientPostBody client){
-        return defaultClient.postRequest(client,"http://localhost:55597/api","Clients");
+        return httpRestClient.postRequest(client,URL,PATH);
     }
 
     //TODO: napravi update request
 
     public Response deleteClient(int id){
-        return defaultClient.deleteRequest(id,"http://localhost:55597/api","Clients");
+        return httpRestClient.deleteRequest(id,URL,PATH);
     }
 
 }

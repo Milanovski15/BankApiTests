@@ -9,7 +9,7 @@ import io.restassured.response.ResponseBody;
 
 public class ClientService {
     ClientClient client = new ClientClient();
-    String url = "api/Clients/";
+
 
     public Response getAllClients() {
         return client.getClients();

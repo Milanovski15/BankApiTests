@@ -7,14 +7,14 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.simple.JSONObject;
 
-public class DefaultClient {
+public class HttpRestClient {
 
     public Response getRequest(String url, String path){
         RestAssured.baseURI = url;
         RequestSpecification requestSpec = RestAssured.given().log().all();
         Response response = requestSpec.request(Method.GET,"/"+path);
         String responseBody = response.getBody().asString();
-        //System.out.println(responseBody);
+        System.out.println(responseBody);
         return response;
     }
 
@@ -29,12 +29,8 @@ public class DefaultClient {
 
     public Response postRequest(Object object, String url, String path){
         RestAssured.baseURI = url;
-
-        //promena za git
-        RequestSpecification requestSpec = RestAssured.given();
-        JSONObject requestParam = new JSONObject();
+        RequestSpecification requestSpec = RestAssured.given().log().all().body(object);
         requestSpec.header("Content-Type","application/json");
-        requestSpec.log().all().body(object);
         Response response = requestSpec.request(Method.POST,"/"+path);
         String responseBody = response.getBody().asString();
         System.out.println(responseBody);
@@ -48,8 +44,8 @@ public class DefaultClient {
         requestSpec.header("Content-Type","application/json");
         requestSpec.log().all().body(accountUpdated);
         Response response = requestSpec.log().all().request(Method.PUT,"/"+path+"/"+id);
-
-        //System.out.println(responseBody);
+        String responseBody = response.getBody().asString();
+        System.out.println(responseBody);
         return response;
     }
 
@@ -57,7 +53,8 @@ public class DefaultClient {
         RestAssured.baseURI = url;
         RequestSpecification requestSpec = RestAssured.given().log().all();
         Response response = requestSpec.request(Method.DELETE,"/"+path+"/"+id);
-        //System.out.println(responseBody);
+        String responseBody = response.getBody().asString();
+        System.out.println(responseBody);
         return response;
     }
 
